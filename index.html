@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHgSpjCxxgP6S2+ekTjwKGr8SA1h5RjG3Kw/ab0L5vT+b4UO/0X6s5L2itXBnSRP8FgKjjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="dashboard-container">
         <nav class="navbar">
             <ul>
-                <li><a href="#" onclick="showReport()">Home</a></li>
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Link 2</a></li>
-                <li><a href="#">Link 3</a></li>
+                <li><a href="#" onclick="showReport()"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <!-- Add more links as needed -->
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
         </nav>
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <iframe title="latihan" width="1024" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiMmMwZGJhMjItMGQ5My00YTNjLWE1ZWQtY2UxN2U5YWY5NTBiIiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
         </main>
     </div>
