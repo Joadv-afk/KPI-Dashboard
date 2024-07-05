@@ -3,24 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHgSpjCxxgP6S2+ekTjwKGr8SA1h5RjG3Kw/ab0L5vT+b4UO/0X6s5L2itXBnSRP8FgKjjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles.css">
+    <title>Power BI Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+        body, html {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide scrollbars */
+            background-color: #f4f4f4;
+            height: 100%;
+            width: 100%;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #2C394B;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 20px;
+        }
+
+        .sidenav h2 {
+            color: #818181;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin: 0 0 10px 32px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px; /* Made text smaller */
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav a i {
+            margin-right: 10px;
+        }
+
+        .sidenav hr {
+            border: 0;
+            height: 1px;
+            background: #818181;
+            margin: 10px 0;
+        }
+
+        .togglebtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #2C394B;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            position: fixed;
+            top: 40px;
+            left: 250px;
+            z-index: 2;
+            transition: left 0.5s;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .togglebtn:hover {
+            background-color: #474F7A;
+        }
+
+        #main {
+            transition: margin-left 0.5s;
+            padding: 16px;
+            margin-left: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Adjusted to align items to the top */
+            height: 100vh;
+        }
+
+        .iframe-container {
+            width: 90%;
+            height: 90vh;
+            box-shadow: 0 4px 8px rgba(0.5, 0.5, 0.5, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(220vh); /* Initially below the viewport */
+            transition: opacity 1.5s ease-out, transform 1.7s ease-out;
+            margin-top: 20px; /* Add margin to the top */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .show-content .iframe-container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <div class="dashboard-container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="#" onclick="showReport()"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <!-- Add more links as needed -->
-                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-            </ul>
-        </nav>
-        <main class="main-content" id="main-content">
-            <iframe title="latihan" width="1024" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiMmMwZGJhMjItMGQ5My00YTNjLWE1ZWQtY2UxN2U5YWY5NTBiIiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
-        </main>
+<body onload="showMainContent()">
+
+<button class="togglebtn" onclick="toggleNav()">☰</button>
+
+<div id="mySidenav" class="sidenav">
+    <br>
+    <h2>Navigation</h2>
+    <br>
+    <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+    <hr>
+</div>
+
+<div id="main">
+    <div class="iframe-container" id="iframeContainer">
+        <iframe title="Hospital ER Dashboard" src="https://app.powerbi.com/view?r=eyJrIjoiNDBkMjljMmUtMzIxYi00MTMxLTk0YmMtNWQ3MGI4YTE1N2NhIiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D&pageName=6f4d8ec726210fb39bbe" allowFullScreen="true"></iframe>
     </div>
-    <script src="scripts.js"></script>
+</div>
+
+<script>
+    function toggleNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const main = document.getElementById("main");
+        const iframeContainer = document.getElementById("iframeContainer");
+        const togglebtn = document.querySelector('.togglebtn');
+        
+        if (sidenav.style.width === "250px" || sidenav.style.width === "") {
+            sidenav.style.width = "0";
+            main.style.marginLeft = "0";
+            togglebtn.style.left = "0px";
+            iframeContainer.style.width = "75%";  // Smaller width when sidenav is closed
+        } else {
+            sidenav.style.width = "250px";
+            main.style.marginLeft = "250px";
+            togglebtn.style.left = "250px";
+            iframeContainer.style.width = "90%";  // Original width when sidenav is open
+        }
+    }
+
+    function showMainContent() {
+        setTimeout(() => {
+            document.body.classList.add('show-content');
+        }, 100);
+    }
+</script>
+     
 </body>
 </html>
