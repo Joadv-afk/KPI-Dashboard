@@ -85,8 +85,8 @@ body, html {
 }
 
 .iframe-container {
-    width: 100%;
-    height: calc(100vh - 40px); /* Adjusted height to fit screen */
+    width: 85%;
+    height: 90vh;
     box-shadow: 0 4px 8px rgba(0.5, 0.5, 0.5, 0.5);
     border-radius: 10px;
     overflow: hidden;
@@ -105,30 +105,4 @@ iframe {
 .show-content .iframe-container {
     opacity: 1;
     transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-    .togglebtn {
-        font-size: 18px;
-        padding: 8px 12px;
-        top: 20px;
-    }
-    
-    .sidenav {
-        padding-top: 15px;
-    }
-
-    .sidenav h2 {
-        font-size: 16px;
-    }
-
-    .sidenav a {
-        font-size: 18px;
-        padding: 6px 6px 6px 20px;
-    }
-
-    .iframe-container {
-        height: calc(100vh - 60px); /* Adjusted height for smaller screens */
-        margin-top: 10px;
-    }
 }

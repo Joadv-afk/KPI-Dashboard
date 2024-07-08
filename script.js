@@ -8,12 +8,12 @@ function toggleNav() {
         sidenav.style.width = "0";
         main.style.marginLeft = "0";
         togglebtn.style.left = "0px";
-        iframeContainer.style.width = "100%";
+        iframeContainer.style.width = "71%";
     } else {
         sidenav.style.width = "250px";
         main.style.marginLeft = "250px";
         togglebtn.style.left = "250px";
-        iframeContainer.style.width = "100%";
+        iframeContainer.style.width = "85%";
     }
 }
 
